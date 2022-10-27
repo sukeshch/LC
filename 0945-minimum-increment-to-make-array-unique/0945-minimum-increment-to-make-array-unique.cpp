@@ -7,8 +7,8 @@ public:
         for(int i=1; i<nums.size(); i++)
         {
             if(prev >= nums[i]) {
+                result += (prev - nums[i] + 1);
                 prev++;
-                result += (prev - nums[i]);
             }
             else prev = nums[i];
         }
