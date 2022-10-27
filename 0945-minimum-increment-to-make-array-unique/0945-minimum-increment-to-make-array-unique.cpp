@@ -6,11 +6,9 @@ public:
         int result = 0;
         for(int i=1; i<nums.size(); i++)
         {
-            // cout << "prev " << prev << " c " << nums[i] << " " << result << endl;
-            if(prev >= nums[i])
-            {
-                result += (prev - nums[i] + 1);
+            if(prev >= nums[i]) {
                 prev++;
+                result += (prev - nums[i]);
             }
             else prev = nums[i];
         }
