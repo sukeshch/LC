@@ -1,8 +1,10 @@
 class Solution {
 public:
+    typedef int Course;
+    typedef vector<int> Prereqs;
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) 
     {
-        unordered_map<int, vector<int>> cp;
+        unordered_map<Course, Prereqs> cp;
         vector<int> indegree(numCourses);
         for(auto cpq : prerequisites)
         {
@@ -14,10 +16,8 @@ public:
         vector<int> result;
         for(int i=0; i<numCourses; i++)
         {
-            if(indegree[i] == 0){
-                result.push_back(i);
-                q.push(i);
-            }
+            if(indegree[i] == 0)
+                q.push(i); // result.push_back(i);
         }
         int count = 0;
         while(!q.empty())
@@ -26,15 +26,13 @@ public:
             {
                 int t = q.front();
                 q.pop();
-                // result.push_back(t);
+                result.push_back(t);
                 for(auto c : cp[t])
                 {
                     indegree[c]--;
                     count++;
-                    if(indegree[c] == 0){
-                        q.push(c);
-                        result.push_back(c);
-                    }
+                    if(indegree[c] == 0)
+                        q.push(c); // result.push_back(c);
                 }
             }
         }
