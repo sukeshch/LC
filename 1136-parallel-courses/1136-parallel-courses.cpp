@@ -10,7 +10,7 @@ public:
         }
         
         queue<int> q;
-        for(int i=1; i<n; i++)
+        for(int i=1; i<=n; i++)
         {
             if(ideg[i] == 0)
                 q.push(i);
