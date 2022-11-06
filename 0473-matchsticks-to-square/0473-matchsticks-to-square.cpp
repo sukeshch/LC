@@ -2,11 +2,14 @@ class Solution {
 public:
     long long sums[4];
     long side_length;
+    // map<long, bool> cache;
     
     bool dfs(vector<int>& ms, int index)
-    {
+    {   
         if(index == ms.size()) 
             return sums[0] == sums[1] && sums[1] == sums[2] && sums[2] == sums[3];
+        
+        bool ret = false;
         for(int i=0; i<4; i++)
         {
             if(sums[i] + ms[index] > side_length) continue;
@@ -26,6 +29,7 @@ public:
         if(sum % 4 != 0) return false;
         side_length = sum/4;
         std::sort(matchsticks.begin(), matchsticks.end(), std::greater<int>());
+        std::bitset<15> bb{0};
         return dfs(matchsticks, 0);
     }
 };
