@@ -16,7 +16,6 @@ public:
         while(!st.empty()){
             res += st.top();
             st.pop();
-            
         }
         std::reverse(res.begin(), res.end());
         return res;
