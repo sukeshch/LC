@@ -35,11 +35,20 @@ public:
     
     ListNode* mergeKLists(vector<ListNode*>& lists) 
     {
-        ListNode *res = NULL;
-        for(int i=0; i<lists.size(); i++)
+        if(lists.size() == 0) return NULL;
+        // for(int i=0; i<lists.size(); i++)
+        // {
+        //     lists[0] = Merge2(lists[0], lists[i]);
+        // }
+        int len = 1;
+        while(len < lists.size())
         {
-            res = Merge2(res, lists[i]);
+            for(int i=0; (i+len) < lists.size(); i+=2*len)
+            {
+                lists[i] = Merge2(lists[i], lists[i+len]);
+            }
+            len*=2;
         }
-        return res;
+        return lists[0];
     }
 };
