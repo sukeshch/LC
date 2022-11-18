@@ -1,7 +1,7 @@
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        vector<int> result;
+        /*vector<int> result;
         int counter1 = 0, counter2 = 0;
         while(counter1 < m && counter2 < n)
         {
@@ -21,6 +21,28 @@ public:
         {
             result.push_back(nums2[counter2++]);
         }
-        nums1 = result;
+        nums1 = result; */
+        
+        int counter = m+n-1, l = m-1, r = n-1;
+        while(counter >= 0) {
+            if(l >= 0 && r >= 0)
+            {
+                if(nums1[l] > nums2[r]){
+                    nums1[counter] = nums1[l];
+                    l--;
+                }
+                else {
+                    nums1[counter] = nums2[r];
+                    r--;
+                }
+            } else if(l >= 0) {
+                nums1[counter] = nums1[l];
+                l--;
+            } else if (r >= 0) {
+                nums1[counter] = nums2[r];
+                r--;
+            }
+            counter--;
+        }
     }
 };
