@@ -41,8 +41,8 @@ public:
         int provinces = 0;
         for(int i=0; i<isConnected.size(); i++) {
             if(!visited[i]) {
-                BFS(isConnected, visited, i);
-                // DFS(isConnected, visited, i);
+                // BFS(isConnected, visited, i);
+                DFS(isConnected, visited, i);
                 provinces++;
             }
         }
