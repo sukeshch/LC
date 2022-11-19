@@ -13,29 +13,27 @@ class Solution {
 public:    
     TreeNode* invertTree(TreeNode* root) {
         if(!root) return root;
-        invertTree(root->left);
-        invertTree(root->right);
-        std::swap(root->left, root->right);
-        // queue<TreeNode*> q;
-        // q.push(root->left);
-        // q.push(root->right);
-        // while(!q.empty())
-        // {
-        //     auto left = q.front();
-        //     q.pop();
-        //     auto right = q.front();
-        //     q.pop();
-        //     cout << (left ? left->val : -1) << " " << (right? right->val : -1) << endl;
-        //     std::swap(left, right);
-        //     if(left) {
-        //         q.push(left->left);
-        //         q.push(left->right);
-        //     }
-        //     if(right) {
-        //         q.push(right->left);
-        //         q.push(right->right);
-        //     }
-        // }        
+        // invertTree(root->left);
+        // invertTree(root->right);
+        // std::swap(root->left, root->right);
+        queue<TreeNode*> q;
+        // TreeNode* prev = root;
+        q.push(root);
+        while(!q.empty())
+        {
+            auto p = q.front();
+            q.pop();
+            std::swap(p->left, p->right);
+            if(p->left) {
+                q.push(p->left);
+            }
+            if(p->right) {
+                q.push(p->right);
+            }
+        }
+        // std::swap(root->left, root->right);
+        // cout << root->left->val<< "," << root->right->val <<endl;
+        
         return root;
     }
 };
