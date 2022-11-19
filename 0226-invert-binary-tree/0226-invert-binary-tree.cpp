@@ -17,7 +17,6 @@ public:
         // invertTree(root->right);
         // std::swap(root->left, root->right);
         queue<TreeNode*> q;
-        // TreeNode* prev = root;
         q.push(root);
         while(!q.empty())
         {
@@ -31,8 +30,6 @@ public:
                 q.push(p->right);
             }
         }
-        // std::swap(root->left, root->right);
-        // cout << root->left->val<< "," << root->right->val <<endl;
         
         return root;
     }
