@@ -33,7 +33,7 @@ public:
     }
     
     int recurse(TreeNode* root, int depth) {
-        cout << ((root) ? root->val : 00) << " :@ " << depth << endl;
+        // cout << ((root) ? root->val : 00) << " :@ " << depth << endl;
         if(!root && depth >= 1) return -1;
         if(depth == 1) return 1;
         if(!searchLeft(root, depth))
