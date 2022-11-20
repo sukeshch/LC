@@ -16,8 +16,9 @@ public:
                         st.pop();
                         for(auto d : dirs) {
                             x += d[0], y += d[1];
-                            if(x < 0 || x >= grid.size() || y < 0 || y >= grid[0].size()) {} 
-                            else if(grid[x][y] == '1'){ 
+                            if(x >=0 && x < grid.size() && 
+                               y >= 0 && y < grid[0].size() && 
+                               grid[x][y] == '1'){ 
                                 st.push({x, y});
                                 grid[x][y] = '0';
                             }
@@ -30,4 +31,14 @@ public:
         }
         return res;
     }
+    // int numIslands(vector<vector<char>>& grid) {
+    //     for(int i=0; i<grid.size(); i++) {
+    //         for(int j=0; j<grid[0].size(); j++) {
+    //             if(grid[i][j] == '1'){
+    //                 DFS(grid, i, j);
+    //             }
+    //         }
+    //     }
+    //     return res;
+    // }
 };
