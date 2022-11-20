@@ -54,8 +54,7 @@ public:
             left = left->left;
             max_depth++;
         }
-        cout << "max depth : " << max_depth << endl;
+        if(max_depth == 1) return 1;
         return recurse(root, max_depth);
-        // return 1;
     }
 };
