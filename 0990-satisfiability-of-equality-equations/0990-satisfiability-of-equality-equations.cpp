@@ -1,5 +1,17 @@
 class Solution {
 public:
+    int find(vector<char> &map, char x) {
+        if(map[x-'a'] != x) {
+            map[x-'a'] = find(map, map[x-'a']) + 'a';
+        }
+        return map[x-'a']-'a';
+    }
+    
+    void unionf(vector<char> &map, int x, int y) {
+        int rx = find(map, x), ry = find(map, y);
+        map[rx] = ry + 'a';
+    }
+    
     bool equationsPossible(vector<string>& equations) {
         /* vector<int> map(26, -1);
         vector<set<char>> v;
@@ -36,41 +48,20 @@ public:
                 }
             }
         } */
+        int N = 26;
+        
         vector<char> map(26);
-        vector<bool> b(26);
-        for(int i=0; i<26; i++) {
-            map[i] = ('a' + i);
+        iota(map.begin(), map.end(), 'a');
+        for(auto e: equations) {
+            if(e[1] == '=') {
+                unionf(map, e[0], e[3]);
+            }
         }
-        for(auto eq : equations) {
-            if(eq[1] == '=') {
-                char x = eq[0], y = eq[3];
-                if(b[int(x-'a')] && b[int(y-'a')]) {
-                    char t = map[int(y-'a')];
-                    for(int i=0; i<26; i++) {
-                        if(map[i] == t) {
-                            // set parent to x if parent is y
-                            map[i] = map[int(x-'a')];
-                        }
-                    }
-                } else if (b[int(x-'a')] && !b[int(y-'a')]) {
-                    map[int(y-'a')] = map[int(x-'a')];
-                    b[int(y-'a')] = true;
-                } else if (!b[int(x-'a')] && b[int(y-'a')]) {
-                    map[int(x-'a')] = map[int(y-'a')];
-                    b[int(x-'a')] = true;
-                } else {
-                    map[int(y-'a')] = map[int(x-'a')];
-                    b[int(x-'a')] = true;
-                    b[int(y-'a')] = true;
-                }
-            } 
-        }
-        for(auto eq : equations) {
-            if(eq[1] == '!') {
-                char x = eq[0], y = eq[3];
-                if(x == y || map[int(x-'a')] == map[int(y-'a')]) {
-                    return false;
-                }
+        
+        for(auto e: equations) {
+            if(e[1] == '!') {
+                int rx = find(map, e[0]), ry = find(map, e[3]);
+                if(rx == ry) return false;
             }
         }
         return true;
