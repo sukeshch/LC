@@ -21,6 +21,12 @@ public:
         return snaps_-1;
     }
     
+    bool cmp(pair<int, int> const& l, pair<int, int> const& r)
+    {
+        // For instance...
+        return l.first < r.second;
+    }
+    
     int get(int index, int snap_id) {
         if(mp_.count(index) == 0) return 0;
         
@@ -28,6 +34,21 @@ public:
         {
             if(s.first == snap_id) return s.second;
         }
+        // int l = 0, n = db_[mp_[index]].size()-1;
+        // if(n > 0) {
+        //     if(db_[mp_[index]][0].first == snap_id) return db_[mp_[index]][0].second;
+        //     if(db_[mp_[index]][n-1].first == snap_id) return db_[mp_[index]][n-1].second;
+        // }
+        // int count = n-l+1, it, step;
+        // while(count > 0) {
+        //     it = l; step=count/2; it+= step;
+        //     if (!(snap_id<db_[mp_[index]][it].first))                 // or: if (!comp(val,*it)), for version (2)
+        //       { l=++it; count-=step+1;  }
+        //     else count=step;
+        // }
+        // if(it == 0) return 0;
+        // it--;
+        // if(db_[mp_[index]][it].first == snap_id) return db_[mp_[index]][it].second;
         return 0;
     }
 private: 
