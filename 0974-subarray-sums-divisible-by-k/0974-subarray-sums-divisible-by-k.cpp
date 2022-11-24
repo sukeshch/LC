@@ -1,7 +1,7 @@
 class Solution {
 public:
     int subarraysDivByK(vector<int>& nums, int k) {
-        vector<int> counts(k, 0);
+        int counts[30000] = {0};
         counts[0]++; // base case
         
         int prev = 0;
