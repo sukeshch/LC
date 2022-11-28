@@ -3,8 +3,7 @@ public:
     vector<vector<int>> findWinners(vector<vector<int>>& matches) {
         map<int, int> lossmp_;
         for(auto m : matches) {
-            lossmp_[m[0]]++;
-            lossmp_[m[0]]--;
+            lossmp_[m[0]] = lossmp_[m[0]];
             lossmp_[m[1]]++;
         }
         vector<vector<int>> result(2, vector<int>());
