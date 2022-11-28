@@ -17,7 +17,6 @@ public:
         mp_[q->val] = q;
         Node* pp = p->parent, *pq = q->parent;
         while(pp || pq) {
-            // cout << (pp ? pp->val : -1) << " " << (pq ? pq->val : -1) << endl;;
             if(pp) {
                 if(mp_.count(pp->val) != 0) return mp_[pp->val];
                 mp_[pp->val] = pp;
