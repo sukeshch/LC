@@ -1,16 +1,17 @@
 class Solution {
 public:
     vector<vector<int>> findWinners(vector<vector<int>>& matches) {
-        map<int, pair<int, int>> mp_;
+        map<int, int> lossmp_;
         for(auto m : matches) {
-            mp_[m[0]].first++;
-            mp_[m[1]].second++;
+            lossmp_[m[0]]++;
+            lossmp_[m[0]]--;
+            lossmp_[m[1]]++;
         }
         vector<vector<int>> result(2, vector<int>());
-        for(auto v : mp_) {
-            if(v.second.second == 0)
+        for(auto v : lossmp_) {
+            if(v.second == 0)
                 result[0].push_back(v.first);
-            if(v.second.second == 1)
+            else if(v.second == 1)
                 result[1].push_back(v.first);
         }
         return result;
