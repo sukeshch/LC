@@ -16,15 +16,17 @@ public:
         mp_[p->val] = p;
         mp_[q->val] = q;
         Node* pp = p->parent, *pq = q->parent;
-        while(pp) {
-            if(mp_.count(pp->val) != 0) return mp_[pp->val];
-            mp_[pp->val] = pp;
-            pp = pp->parent;
-        }
-        while(pq) {
-            if(mp_.count(pq->val) != 0) return mp_[pq->val];
-            mp_[pq->val] = pq;
-            pq = pq->parent;
+        while(pp || pq) {
+            if(pp) {
+                if(mp_.count(pp->val) != 0) return mp_[pp->val];
+                mp_[pp->val] = pp;
+                pp = pp->parent;
+            }
+            if(pq) {
+                if(mp_.count(pq->val) != 0) return mp_[pq->val];
+                mp_[pq->val] = pq;
+                pq = pq->parent;
+            }
         }
         return pp;
     }
