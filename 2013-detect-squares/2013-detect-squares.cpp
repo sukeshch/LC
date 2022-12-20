@@ -11,13 +11,10 @@ public:
     int count(vector<int> point) {
         int result = 0;
         int x = point[0];
-        // cout << "point " << point[0] << "," << point[1] << endl;
         for(auto p : points_on_x_[x] ) {
             if(p.first.first == point[0] && p.first.second == point[1]) continue;
             result += p.second * checkSquare(point, {p.first.first, p.first.second});
-            // cout << points_on_x_[x].size() << " loop result " << result << endl;
         }
-        // cout << "count result " << result << endl;
         return result;
     }
 private:
