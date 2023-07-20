@@ -1,23 +1,28 @@
 class Solution {
 public:
-    void recurse(vector<int> nums, int index, vector<vector<int>> &result)
+    void backtrack(vector<int> &curr, vector<int> &nums, bitset<6> &b, vector<vector<int>> &result)
     {
-        if(nums.size() == index)
-        {
-            result.push_back(nums);
+        if(curr.size() == nums.size()) {
+            result.push_back(curr);
             return;
         }
-        for(int i= index; i<nums.size(); i++)
-        {
-            vector<int> temp = nums;
-            swap(temp[index], temp[i]);
-            recurse(temp, index+1, result);
+        for(int i = 0; i < nums.size(); i++) {
+            if(!b.test(i)) {
+                b.set(i);
+                curr.push_back(nums[i]);
+                backtrack(curr, nums, b, result);
+                curr.pop_back();
+                b.reset(i);
+            }
         }
+        
     }
     
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> result;
-        recurse(nums, 0, result);
+        vector<int> curr;
+        bitset<6> b(0);
+        backtrack(curr, nums, b, result);
         return result;
     }
 };
