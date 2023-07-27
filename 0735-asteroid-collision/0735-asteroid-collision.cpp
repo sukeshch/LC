@@ -7,13 +7,11 @@ public:
         int id = 1;
         while(id < asteroids.size()) {
             if(result.size() && 
-               (result.top() * asteroids[id] < 0) && 
-               result.top() >= asteroids[id])
+               (result.top() > 0 && asteroids[id] < 0))
             {
                 int current = asteroids[id];
                 while(result.size() 
-                      && result.top() * current < 0 
-                      && result.top() >= current) {
+                      && (result.top() > 0 && current < 0) ) {
                     if(result.top() + current == 0) {
                         current = 0;
                         result.pop();
