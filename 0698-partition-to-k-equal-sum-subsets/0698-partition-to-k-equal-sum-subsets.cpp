@@ -3,7 +3,10 @@ public:
     bool recurse(int nidx, bitset<16> b,  
                  int distribute, 
                  vector<int>& nums, 
-                 int k, int bucket, int prev_index = 0)    {
+                 int k, int bucket, int prev_index,
+                 unordered_map<unsigned long, bool> &mp)    {
+        if(mp.count(b.to_ulong()))
+            return mp[b.to_ulong()];
         if(nidx == k - 1) {
             return true;
         }
@@ -20,13 +23,14 @@ public:
                     b, 
                     (distribute ==  bucket) ? 0 : distribute, 
                     nums, k, bucket, 
-                (distribute ==  bucket) ? 0 : i))
+                (distribute ==  bucket) ? 0 : i, mp))
                     return true;
                 distribute -= nums[i];
                 b.reset(i);
             }
         }
-        return false;
+        mp[b.to_ulong()] = false;
+        return mp[b.to_ulong()];
     }
     
     bool canPartitionKSubsets(vector<int>& nums, int k) {
@@ -35,6 +39,7 @@ public:
         if(sum % k != 0) return false;
         bitset<16> b(0);
         sort(nums.begin(), nums.end(), std::greater<int>());
-        return recurse(0, b, 0, nums, k, sum/k);
+        unordered_map<unsigned long, bool> mp;
+        return recurse(0, b, 0, nums, k, sum/k, 0, mp);
     }
 };
