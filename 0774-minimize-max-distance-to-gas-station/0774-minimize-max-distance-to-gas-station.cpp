@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // This fails without inline function. 
+    // showing why inline functions are faster!
     inline bool possible(vector<int>& stations, double k, double d) {
         int st_needed = 0;
         for(int i=1; i<stations.size(); i++) {
