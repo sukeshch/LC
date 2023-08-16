@@ -17,8 +17,9 @@ public:
         int low = 1, high = max_qty;
         
         int res = high;
+        int mid;
         while(low <= high) {
-            int mid = (low + high) / 2;
+            mid = (low + high) / 2;
             if(canProductsDist(quantities, n, mid)) { // satisfies, so search low, mid space
                 high = mid - 1;
                 res = mid;
