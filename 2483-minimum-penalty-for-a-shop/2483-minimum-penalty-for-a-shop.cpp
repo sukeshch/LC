@@ -13,13 +13,15 @@ public:
         
         int res_ind = -1, min_penalty = INT_MAX;
         penalty_open[0] = 0;
+        penalty_close[N+1] = 0;
+        
         for ( int i = 0; i < N; i++ ) {
             penalty_open[i + 1] = penalty_open[i] + (is_customer[i] ? 0 : 1);
+            penalty_close[N-1-i+1] = penalty_close[N-1-i+1 + 1] + (is_customer[N-1-i] ? 1 : 0);
         }
-        penalty_close[N+1] = 0;
-        for ( int i = N-1; i >= 0; i--) {
-            penalty_close[i+1] = penalty_close[i+1+1] + (is_customer[i] ? 1 : 0);
-        }
+        // for ( int i = N-1; i >= 0; i--) {
+        //     penalty_close[i + 1] = penalty_close[i+1+1] + (is_customer[i] ? 1 : 0);
+        // }
         
         for(int i=0; i<=N; i++) {
             if(min_penalty > (penalty_open[i] + penalty_close[i+1]))  {
