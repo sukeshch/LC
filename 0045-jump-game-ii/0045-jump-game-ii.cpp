@@ -20,11 +20,27 @@ public:
         return dp[index] = min_st + 1;
     }
     
+    // int jump(vector<int>& nums) {
+    //     vector<int> dp(nums.size(), -1);
+    //     if(nums.size() == 1) {
+    //         return 0;
+    //     }
+    //     return recurse(nums, 0, dp);
+    // }
+    
     int jump(vector<int>& nums) {
-        vector<int> dp(nums.size(), -1);
-        if(nums.size() == 1) {
-            return 0;
+        int curEnd = 0, curFar = 0;
+        int result = 0;
+        for(int i=0; i < nums.size()-1; i++) {
+            curFar = max(curFar, i + nums[i]);
+            // if(curFar > nums.size() - 1) {
+            //     break;
+            // }
+            if(i == curEnd) {
+                result++;
+                curEnd = curFar;
+            }
         }
-        return recurse(nums, 0, dp);
+        return result;
     }
 };
