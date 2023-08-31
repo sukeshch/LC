@@ -4,11 +4,9 @@ public:
         if(dp[index] != -1) {
             return dp[index];
         }
-        if(index == nums.size() - 1) {
-            return 0;
-        }
         if(nums[index] == 0) {
             dp[index] = 10000;
+            return dp[index];
         }
         if(index + nums[index] >= nums.size() - 1)
         {
@@ -27,6 +25,9 @@ public:
     
     int jump(vector<int>& nums) {
         vector<int> dp(nums.size(), -1);
+        if(nums.size() == 1) {
+            return 0;
+        }
         return recurse(nums, 0, dp);
     }
 };
