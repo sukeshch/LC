@@ -5,11 +5,9 @@ public:
             return dp[index];
         }
         if(nums[index] == 0) {
-            dp[index] = 10000;
-            return dp[index];
+            return dp[index] = 10000;
         }
-        if(index + nums[index] >= nums.size() - 1)
-        {
+        if(index + nums[index] >= nums.size() - 1) {
             return 1;
         }
         int min_st = 10001;
@@ -19,7 +17,6 @@ public:
                 min_st = res;
             }
         }
-        // std::cout << "index : " << index << endl;
         return dp[index] = min_st + 1;
     }
     
