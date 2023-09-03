@@ -1,8 +1,8 @@
 class Solution {
 public:
     int M, N;
-    vector<int> count0, count1;
-    vector<vector<vector<optional<int>>>> dp;
+    vector<short> count0, count1;
+    vector<vector<vector<optional<short>>>> dp;
     
     int recurse(vector<string>& input, int idx, int cM, int cN) {
         if(idx == input.size()) {
@@ -45,9 +45,9 @@ public:
             count1[i] = input[i].size() - ct_zeros;
             // cout << "i : 0s " << count0[i] << " 1s: " << count1[i] << endl;
         }
-        dp = vector<vector<vector<optional<int>>>>(
+        dp = vector<vector<vector<optional<short>>>>(
             input.size() + 1,
-            vector<vector<optional<int>>>(M + 1, vector<optional<int>>(N+1, nullopt)));
+            vector<vector<optional<short>>>(M + 1, vector<optional<short>>(N+1, nullopt)));
         return recurse(input, 0, 0, 0);
     }
 };
