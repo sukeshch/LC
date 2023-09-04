@@ -35,15 +35,14 @@ public:
     
     int longestCommonSubsequence(string text1, string text2) {
         auto dp = std::vector<std::vector<int>>(2, std::vector<int>(text2.size() + 1, 0));
-        int cur = 1, prev = 0;
+        int cur = 1;
         for(int i=0; i<text1.size(); i++) {
             for(int j=0; j<text2.size(); j++) {
                 dp[cur][j+1] = 
-                    (text1[i] == text2[j]) ? 1 + dp[prev][j] : max(dp[prev][j+1], dp[cur][j]);
+                    (text1[i] == text2[j]) ? 1 + dp[!cur][j] : max(dp[!cur][j+1], dp[cur][j]);
             }
             cur ^= 1;
-            prev ^= 1;
         }
-        return dp[prev][text2.size()];
+        return dp[!cur][text2.size()];
     }
 };
