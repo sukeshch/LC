@@ -8,7 +8,7 @@ public:
         }
         for(auto v : mp_) {
             if(v.second.size() <= 1) continue;
-            std::sort(v.second.begin(), v.second.end());
+            // std::sort(v.second.begin(), v.second.end());
             std::vector<long long> prefixSum(v.second.size() + 1);
             prefixSum[0] = 0;
             prefixSum.back() = 0;
