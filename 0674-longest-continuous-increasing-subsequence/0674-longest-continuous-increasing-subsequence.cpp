@@ -4,14 +4,12 @@ public:
         int start = 0, curr = start + 1;
         int lcis = 1;
         while(curr < nums.size()) {
-            if(nums[curr] > nums[curr-1]) {
-                lcis = max(lcis, curr - start + 1);
-            } else {
+            if(nums[curr-1] >= nums[curr]) {
                 start = curr;
             }
+            lcis = max(lcis, curr - start + 1);
             curr++;
         }
-        lcis = max(lcis, curr - start);
         return lcis;
     }
 };
