@@ -23,11 +23,7 @@ public:
         for(int i=0; i < N; i++) {
             if(i > cur_max)
                 return false;
-            
             cur_max = max(cur_max, i + nums[i]);
-            
-            // if(cur_max == N-1) 
-            //     return true;
         }
         
         return (cur_max >= (nums.size()-1));
