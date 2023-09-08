@@ -27,8 +27,8 @@ public:
             
             cur_max = max(cur_max, i + nums[i]);
             
-            if(cur_max == N-1) 
-                return true;
+            // if(cur_max == N-1) 
+            //     return true;
             i++;
         }
         
