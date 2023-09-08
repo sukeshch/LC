@@ -1,12 +1,12 @@
 class Solution {
 public:
     bool canAttendMeetings(vector<vector<int>>& intervals) {
-        // if(intervals.size() == 1) return true;
-
-        std::sort(intervals.begin(), intervals.end());
-        for(int i=1; i<intervals.size(); i++) {
-            if(intervals[i-1][1] > intervals[i][0])
+        sort(intervals.begin(), intervals.end());
+        int index = 0;
+        while(index + 1 < intervals.size()) {
+            if(intervals[index+1][0] < intervals[index][1])
                 return false;
+            index++;
         }
         return true;
     }
