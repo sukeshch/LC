@@ -20,8 +20,7 @@ public:
     bool canJump(vector<int>& nums) {
         int cur_max = 0;
         int N = nums.size();
-        int i = 0;
-        while(i < N) {
+        for(int i=0; i < N; i++) {
             if(i > cur_max)
                 return false;
             
@@ -29,7 +28,6 @@ public:
             
             // if(cur_max == N-1) 
             //     return true;
-            i++;
         }
         
         return (cur_max >= (nums.size()-1));
