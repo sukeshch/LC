@@ -19,6 +19,8 @@ public:
                 count ++;
             } else if (nums[i] < target) {
                 count += combinationSum4(nums, target - nums[i]);
+            } else {
+                break;
             }
         }
         return dp[target] = count;
