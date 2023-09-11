@@ -1,7 +1,7 @@
 class Solution {
 public:
     int MOD=1000000007;
-    vector<vector<long long>> dp;
+    vector<vector<int>> dp;
     int recurse(long long p, long long d) {
         if(p == 0 && d == 0) {
             return 1;
@@ -11,7 +11,7 @@ public:
         }
         long long count = 0;
         if(p > 0) {
-            count += static_cast<long long>(p * recurse(p-1, d)) % MOD;
+            count += (p * recurse(p-1, d)) % MOD;
         }
         if(d > p) {
             count += ((d-p) * recurse(p, d-1) % MOD) % MOD;
@@ -22,7 +22,7 @@ public:
     // " " --> "P" --> "D"
     int countOrders(int n) {
         int pickup = n, delv = n;
-        dp = vector<vector<long long>>(n + 1, vector<long long>(n + 1, -1));
+        dp = vector<vector<int>>(n + 1, vector<int>(n + 1, -1));
         return recurse(n, n) % MOD;
     }
     
