@@ -9,21 +9,18 @@
  */
 
 class Solution {
-public:
+public:    
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        int min = root->val, max = root->val;
-        int smin = std::min(p->val, q->val);
-        int smax = std::max(p->val, q->val);
+        int pval = p->val, qval = q->val;
         while(root) {
-            if(smin < root->val && smax < root->val) {
+            if(root->val == pval || root->val == qval) return root;
+            if(pval < root->val && qval < root->val) {
                 root = root->left;
-            } else if(smin > root->val && smax > root->val) {
+            } else if (pval > root->val && qval > root->val) {
                 root = root->right;
-            }
-            else {
+            } else 
                 return root;
-            }
         }
-        return root;
+        return NULL;
     }
 };
