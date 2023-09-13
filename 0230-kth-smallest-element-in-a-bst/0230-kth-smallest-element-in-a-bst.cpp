@@ -22,7 +22,8 @@ public:
             }
             curr = st.top(), st.pop();
             num_val ++;
-            if(num_val == k) 
+            // if(num_val == k) 
+            if(--k == 0)
                 return curr->val;
             curr = curr->right;
         }
