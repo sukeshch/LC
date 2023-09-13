@@ -31,6 +31,8 @@ public:
         int pre_index = pre_st;
         
         if(in_index > in_st) { 
+            // use size of left sub tree from inorder 
+            // to figure out preorder left, right distinction
             pre_index = pre_st + (in_index - in_st);
             node->left = recurse(preorder, inorder, 
                                 pre_st + 1, pre_index,
