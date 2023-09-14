@@ -18,7 +18,7 @@ public:
                 result++;
             } 
             else {
-                max_end = max(max_end, c[1]);
+                max_end = c[1];
             }
         }
         
