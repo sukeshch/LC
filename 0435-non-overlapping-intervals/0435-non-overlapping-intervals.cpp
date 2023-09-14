@@ -3,7 +3,7 @@ public:
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
         int result = 0;
         sort(intervals.begin(), intervals.end(), [](auto a, auto b){
-            return a[1] == b[1] ? a[0] < b[0] : a[1] < b[1];
+            return a[1] < b[1];
             });
         // for(auto i : intervals) {
         //     printf("[%d, %d] ", i[0], i[1]);
