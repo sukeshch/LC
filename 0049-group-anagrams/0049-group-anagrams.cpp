@@ -2,20 +2,15 @@ class Solution {
 public:
     
     vector<vector<string>> groupAnagrams(vector<string>& input) {
-        vector<vector<string>> ans; 
+        
         unordered_map<string, vector<string>> mp_;
         for (int i=0; i<input.size(); i++) {
-            int counts[26] = {0};
-            for (auto c : input[i]) {
-                counts[c-'a']++;
-            }
-            string sortedinput = "";
-            for(int k=0; k<26; k++) {
-                sortedinput += string('a'+k, counts[k]);
-            }
-            mp_[sortedinput].push_back(input[i]);
+            string in = input[i];
+            sort(in.begin(), in.end());
+            mp_[in].push_back(input[i]);
         }
         
+        vector<vector<string>> ans; 
         for(auto p : mp_) {
             ans.push_back(p.second);
         }
