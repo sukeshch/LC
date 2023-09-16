@@ -5,14 +5,18 @@ public:
         int start = 0, end = N-1;
         int ans = 0;
         while(start < end) {
-            ans = max(ans, 
-                     (end-start) * min(height[start], height[end])
-                     );
             
             if(height[start] > height[end]) {
+                ans = max(ans, 
+                     (end-start) * height[end]
+                     );
                 end--;
-            } else start++;
-            
+            } else {
+                ans = max(ans, 
+                     (end-start) * height[start]
+                     );
+                start++;
+            }
         }
         return ans;
     }
