@@ -17,9 +17,29 @@ public:
     }
     
     
-    int maxProfit(vector<int>& prices) {
-        dp = vector<vector<int>>(2, vector<int>(prices.size(), -1));
+//     int maxProfit(vector<int>& prices) {
+//         dp = vector<vector<int>>(2, vector<int>(prices.size(), -1));
         
-        return recurse(prices, 0, true);
+//         return recurse(prices, 0, true);
+//     }
+    int maxProfit(vector<int>& prices) {
+        int min_seen = prices[0];
+        int index = 1;
+        int ans = 0;
+        
+        while(index < prices.size()) {
+            while(index < prices.size() && prices[index-1] > prices[index]) {
+                min_seen = prices[index];
+                index++;
+            }
+            int curmax = 0;
+            while(index < prices.size() && prices[index-1] <= prices[index]) {
+                curmax = max(curmax, prices[index] - min_seen);
+                index++;
+            }
+            ans += curmax;
+        }
+        
+        return ans;
     }
 };
