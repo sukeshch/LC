@@ -28,7 +28,6 @@ public:
     void deepCopy(Node* node) {
         if(visited[node->val]) // avoid multiple recursions with same node
             return;
-        // cout << __func__ << node->val << endl;
         
         if(mp_[node->val] == NULL) 
             mp_[node->val] = new Node(node->val);
@@ -36,22 +35,19 @@ public:
         
         mp_[node->val]->neighbors.resize(node->neighbors.size());
         int cnt = 0;
-        // cout << "childs " << node->val << endl;
         for(int i = 0; i < node->neighbors.size(); i++) {
             if ( mp_[node->neighbors[i]->val] == NULL ) {
-                mp_[node->neighbors[i]->val] = new Node(node->neighbors[i]->val);
-            }
-            mp_[node->val]->neighbors[i] = mp_[node->neighbors[i]->val];
-            // cout << "childs of " << node->val << " i " << i << " val= " << node->neighbors[i]->val << endl;
-        }
-        
-        for(int i = 0; i < node->neighbors.size(); i++) {
-            // cout << "recurse " << endl;
-            if(!visited[node->neighbors[i]->val]) {
-                // cout << "recurse call on " << node->neighbors[i]->val << endl;
+                // mp_[node->neighbors[i]->val] = new Node(node->neighbors[i]->val);
                 deepCopy(node->neighbors[i]);
             }
+            mp_[node->val]->neighbors[i] = mp_[node->neighbors[i]->val];
         }
+        
+        // for(int i = 0; i < node->neighbors.size(); i++) {
+        //     if(!visited[node->neighbors[i]->val]) {
+        //         deepCopy(node->neighbors[i]);
+        //     }
+        // }
         
     }
     
