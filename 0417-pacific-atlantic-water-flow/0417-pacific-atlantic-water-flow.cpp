@@ -12,7 +12,7 @@ public:
         if(visited[r][c])
             return;
         visited[r][c] = true;
-        if(crPc[r][c] && crAt[r][c]) result.push_back({r, c});
+        // if(crPc[r][c] && crAt[r][c]) result.push_back({r, c});
         
         for(auto dir : dirs) {
             int r1 = r + dir[0], c1 = c + dir[1];
@@ -40,6 +40,14 @@ public:
         for(int row = 0; row < R; row++) {
             dfs(heights, crPc, row, 0);
             dfs(heights, crAt, row, C-1);
+        }
+        
+        for (int row = 0; row < R; row++) {
+            for(int col = 0; col < C; col++) {
+                if(crPc[row][col] && crAt[row][col])
+                    result.push_back({row,col});
+                
+            }
         }
         
         return result;
