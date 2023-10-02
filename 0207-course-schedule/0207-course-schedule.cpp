@@ -1,73 +1,50 @@
 class Solution {
 public:
-    typedef int Course;
-    typedef vector<int> Prereq;
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) 
-    {
-        unordered_map<Course, Prereq> cp;
-        vector<int> indegree(numCourses);
-        for(auto cpq : prerequisites)
-        {
-            cp[cpq[1]].push_back(cpq[0]);
-            indegree[cpq[0]] ++;
+    int N;
+    vector<vector<int>> adj_;
+    vector<int> indeg_;
+    
+    bool canFinish(int numCourses, vector<vector<int>>& prereq) {
+        N = numCourses;
+        adj_ = vector<vector<int>>(N, vector<int>());
+        indeg_ = vector<int>(N, 0);
+        
+        for(auto pre : prereq) {
+            // prereq --> course
+            adj_[pre[1]].push_back(pre[0]);
+            // indeg[course] + 1
+            indeg_[pre[0]]++;
         }
-        vector<int> order;
-        queue<int> q;
-        for(int i=0; i<numCourses; i++)
-        {
-            if(indegree[i] == 0)
-                q.push(i);
-        }
-        int count = 0;
-        while(!q.empty())
-        {
-            for(int i=0, sz = q.size(); i<sz; i++)
-            {
-                int t = q.front();
-                q.pop();
-                for(auto c : cp[t])
-                {
-                    indegree[c]--;
-                    count++;
-                    if(indegree[c] == 0)
-                        q.push(c);
+        
+        vector<bool> visited(N, false);
+        int reachable_nodes = 0;
+        
+        queue<int> q; // zero indegree nodes
+        
+        for(int i=0; i<N; i++) {
+            if(indeg_[i] == 0) {
+                if (adj_[i].size() == 0)
+                    reachable_nodes++;
+                else {
+                    q.push(i);
+                    visited[i] = 1;
                 }
             }
         }
-        if(count == prerequisites.size())
-        {
-            return true;
+        
+        while(!q.empty()) {
+            auto top = q.front();
+            q.pop();
+            reachable_nodes++;
+            for(auto n : adj_[top]) {
+                indeg_[n]--;
+                if(!visited[n] && indeg_[n] == 0) {
+                    visited[n] = 1;
+                    q.push(n);
+                }
+            }
         }
-        return false;
+        
+        return reachable_nodes == N;
     }
-//     bool isCycleDFS(map<Course, Prereq> &cp, vector<bool> &visited, vector<bool> &checked, int current)
-//     {
-//         if(checked[current]) return false;
-//         if(visited[current]) return true;
-//         visited[current] = true;
-//         bool ret = false;
-//         for(int i=0; i<cp[current].size(); i++)
-//         {
-//             ret = isCycleDFS(cp, visited, checked, cp[current][i]);
-//             if(ret) break;
-//         }
-//         visited[current] = false;
-//         checked[current] = true;
-//         return ret;
-//     }
-    
-//     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-//         map<Course, Prereq> cp;
-//         for(auto p: prerequisites)
-//         {
-//             cp[p[0]].push_back(p[1]);
-//         }
-//         vector<bool> visited(numCourses), checked(numCourses);
-//         for(auto v : cp)
-//         {
-//             if(isCycleDFS(cp, visited, checked, v.first))
-//                 return false;
-//         }
-//         return true; 
-//     }
 };
