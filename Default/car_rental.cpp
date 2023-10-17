@@ -27,11 +27,12 @@ class Car {
 public:
   Car(string license_plate, string brand)
       : license_plate_(license_plate), brand_(brand) {}
+  virtual ~Car() {}
 
   virtual int getCapacity() const = 0;
-  string getLicensePlate() const { return license_plate_; }
-
   virtual CarType getType() const = 0;
+  string getLicensePlate() const { return license_plate_; }
+  friend ostream &operator<<(ostream &os, const Car &car);
 
 private:
   string license_plate_;
@@ -39,7 +40,7 @@ private:
 };
 
 ostream &operator<<(ostream &os, const Car &car) {
-  os << "Car - \tLicense: " << car.getLicensePlate()
+  os << "Car - \tLicense: " << car.license_plate_
      << " \tCar Type: " << car.getType() << " \tCapacity: " << car.getCapacity()
      << endl;
   return os;
@@ -89,13 +90,26 @@ private:
 
 class CarRental {
 public:
-  void createCar(std::shared_ptr<Car> car) {
-    if (inventory_.count(car->getLicensePlate())) {
+  /*
+  Optional package could be a struct to handle options
+  based on type optional_package means
+  Sedan -- optional_package == has_sport_package
+  SUV   -- optional_package == has_third_row
+  */
+  void createCar(string license_plate, string brand, CarType type,
+                 bool optional_package = false) {
+    if (inventory_.count(license_plate)) {
       cout << "Error: License Plate already found!!" << endl;
       return;
     }
-    inventory_[car->getLicensePlate()] = car;
+    if (type == CarType::SUV)
+      inventory_[license_plate] =
+          std::make_unique<SUV>(license_plate, brand, optional_package);
+    else if (type == CarType::SEDAN)
+      inventory_[license_plate] =
+          std::make_unique<Sedan>(license_plate, brand, optional_package);
   }
+
   void deleteCar(string license_plate) {
     if (inventory_.count(license_plate) == 0) {
       cout << "Error deleting! License Plate not found." << endl;
@@ -105,9 +119,8 @@ public:
   }
 
   void printCars(CarType type = CarType::ALL) {
-
     cout << "Printing " << type << " cars. \n";
-    for (auto p : inventory_) {
+    for (const auto &p : inventory_) {
       if (type == CarType::ALL) {
         cout << *(p.second);
       } else if (p.second->getType() == type) {
@@ -119,19 +132,15 @@ public:
 private:
   // Assuming license plate is unique
   // license -> car
-  unordered_map<string, std::shared_ptr<Car>> inventory_;
+  unordered_map<string, std::unique_ptr<Car>> inventory_;
 };
 
 int main() {
-  auto suv_bmw = std::make_shared<SUV>("A", "bmw", false);
-  auto suv_bmw_3rd = std::make_shared<SUV>("B", "bmw", true);
-  auto sedam_audi = std::make_shared<Sedan>("C", "audi", false);
-  auto sedam_audi_sport = std::make_shared<Sedan>("D", "audi", true);
   CarRental carRental;
-  carRental.createCar(suv_bmw);
-  carRental.createCar(suv_bmw_3rd);
-  carRental.createCar(sedam_audi);
-  carRental.createCar(sedam_audi_sport);
+  carRental.createCar("A", "bmw", CarType::SUV, false);
+  carRental.createCar("B", "bmw", CarType::SUV, true);
+  carRental.createCar("C", "audi", CarType::SEDAN, false);
+  carRental.createCar("D", "audi", CarType::SEDAN, true);
   carRental.printCars();
   carRental.printCars(CarType::SEDAN);
 }
