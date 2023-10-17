@@ -30,8 +30,9 @@ public:
   virtual ~Car() {}
 
   virtual int getCapacity() const = 0;
-  virtual CarType getType() const = 0;
   string getLicensePlate() const { return license_plate_; }
+
+  virtual CarType getType() const = 0;
   friend ostream &operator<<(ostream &os, const Car &car);
 
 private:
