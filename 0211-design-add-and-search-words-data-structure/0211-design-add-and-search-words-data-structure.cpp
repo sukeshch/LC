@@ -1,37 +1,41 @@
 class WordDictionary {
-    unordered_set<string> words_;
-public:
-    WordDictionary() {
-        
-    }
-    
-    void addWord(string word) {
-        words_.insert(word);
-    }
-    
-    bool search(string word) {
-        int dotcount = 0;
-        int dotindex[2] = {0};
-        for(int i=0; i<word.size(); i++) {
-            if(word[i] == '.'){
-                dotindex[dotcount] = i;
-                dotcount++;
-            }
-        }
-        for(int i=0; i<26 && dotcount == 1; i++) {
-            word[dotindex[0]] = 'a' + i;
-            if(words_.find(word) != words_.end())
-                return true;
-        }
-        for(int i=0; i<26 && dotcount == 2; i++) {
-            for(int j=0; j<26; j++) {
-                word[dotindex[0]] = i + 'a';
-                word[dotindex[1]] = j + 'a';
-                if(words_.find(word) != words_.end())
+    struct Node{
+        bool is_word = false;
+        Node *childs[26];
+    };
+    Node *root;
+    bool search(string word, int index, Node* root) {
+        if(!root) return false;
+        if(index == word.size())
+            return root->is_word;
+        if(word[index] != '.')
+            return search(word, index + 1, root->childs[word[index]-'a']);
+        for(int i=0; i<26; i++) {
+            if(root->childs[i] != NULL){
+                if(search(word, index+1, root->childs[i]))
                     return true;
             }
         }
-        return words_.find(word) != words_.end();
+        return false;
+    }
+    
+public:
+    WordDictionary() {
+        root = new Node();
+    }
+    
+    void addWord(string word) {
+        Node *curr = root;
+        for(auto c : word) {
+            if(curr->childs[c-'a'] == NULL)
+                curr->childs[c-'a'] = new Node();
+            curr = curr->childs[c-'a'];
+        }
+        curr->is_word = true;
+    }
+    
+    bool search(string word) {
+        return search(word, 0, root);
     }
 };
 
