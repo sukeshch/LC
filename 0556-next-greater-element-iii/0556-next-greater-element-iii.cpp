@@ -25,13 +25,9 @@ public:
             ct = right;
             right++;
         }
-        std::cout << "l;r" << left << ":" << ct << endl;
         std::swap(num[left], num[ct]);
         std::reverse(num.begin() + left + 1, num.end());
-        for(auto v : num) {
-            std::cout << v << " ";
-        }
-        std::cout << std::endl;
+
         long long val = 0;
         for(auto v : num) {
             val = 10 * val + v;
