@@ -18,7 +18,7 @@ public:
         
         int a_idx = 0;
         while(a_idx < abbr.size() && w_idx < word.size()) {
-            if(std::isdigit(abbr[a_idx]) && abbr[a_idx] == '0') 
+            if(abbr[a_idx] == '0') 
                return false;
             int val = is_num(abbr, a_idx);
             if(val == -1) {
