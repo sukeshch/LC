@@ -39,7 +39,6 @@ public:
         for(auto itr : cv_map) {
             result.push_back(itr.second);
         }
-        
         return result;
     }
 };
