@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int is_num(string const &abbr, int& idx) {
+    inline int is_num(string const &abbr, int& idx) {
         if(!std::isdigit(abbr[idx])) return -1;
         int val = 0;
         while(
