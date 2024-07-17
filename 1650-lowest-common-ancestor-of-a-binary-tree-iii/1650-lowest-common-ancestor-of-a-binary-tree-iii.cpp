@@ -24,7 +24,7 @@ public:
             if(val_node_map.count(q->val) != 0) {
                 return val_node_map[q->val];
             }
-            val_node_map[q->val] = q;
+            // val_node_map[q->val] = q;
             q = q->parent;
         }
         
