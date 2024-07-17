@@ -12,22 +12,22 @@ public:
 class Solution {
 public:
     Node* lowestCommonAncestor(Node* p, Node * q) {
-        unordered_map<int, Node*> mp_;
-        mp_[p->val] = p;
-        mp_[q->val] = q;
-        Node* pp = p->parent, *pq = q->parent;
-        while(pp || pq) {
-            if(pp) {
-                if(mp_.count(pp->val) != 0) return mp_[pp->val];
-                mp_[pp->val] = pp;
-                pp = pp->parent;
-            }
-            if(pq) {
-                if(mp_.count(pq->val) != 0) return mp_[pq->val];
-                mp_[pq->val] = pq;
-                pq = pq->parent;
-            }
+        unordered_map<int, Node*> val_node_map;
+        
+        while(p != NULL) {
+            val_node_map[p->val] = p;
+            cout << p->val << " visited \n";
+            p = p->parent;            
         }
-        return pp;
+        
+        while(q) {
+            if(val_node_map.count(q->val) != 0) {
+                return val_node_map[q->val];
+            }
+            val_node_map[q->val] = q;
+            q = q->parent;
+        }
+        
+        return nullptr;
     }
 };
