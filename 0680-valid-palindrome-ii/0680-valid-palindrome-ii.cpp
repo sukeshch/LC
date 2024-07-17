@@ -26,7 +26,6 @@ public:
                 return is_pal(s, start, end-1) || is_pal(s, start+1, end);
             }
         }
-        
         return true;
     }
 };
