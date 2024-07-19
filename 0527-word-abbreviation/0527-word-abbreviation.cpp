@@ -1,6 +1,6 @@
 class Solution {
 public:
-// #define DEBUG  
+#define DEBUG  
 #ifdef DEBUG
     #define LOG(str) std::cout << str;
     #define LOGN(str) std::cout << str << std::endl;
@@ -20,8 +20,10 @@ public:
         unsigned char count = 0;
         unordered_map<char, Trie*> childs;
         ~Trie() {
-            for(auto child : childs)
+            LOGN("deleting childs " << childs.size())
+            for(auto child : childs) {
                 delete child.second;
+            }
         }
     };
     
@@ -79,14 +81,17 @@ public:
                     index++;
                     curr = curr->childs[word[index]];
                 }
+                
+                // if abbr is shorter than actual word
                 if(index + 1 < (words[wIdx].size() - 1 - 1) ) {
-                    int sz = words[wIdx].size() - 1 - index - 1;
+                    int sz = words[wIdx].size() - 1 - index - 1; // lastidx - index - 1
                     result[wIdx] = words[wIdx].substr(0, index+1) + to_string(sz) + words[wIdx].back();
                 }
                 else {
                     result[wIdx] = words[wIdx];
                 }
             }
+            LOGN("deleting root");
             delete root;
         }
         
