@@ -28,6 +28,7 @@ public:
             (flipEquiv(root1->left, root2->right) &&
                 flipEquiv(root1->right, root2->left));
         
+        /*
         auto l1 = root1->left->val;
         auto l2 = root2->left->val;
         auto r1 = root1->right->val;
@@ -46,5 +47,6 @@ public:
         } else {
             return false;
         }
+        */
     }
 };
