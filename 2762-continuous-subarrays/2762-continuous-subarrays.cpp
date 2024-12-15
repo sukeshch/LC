@@ -17,23 +17,36 @@ public:
     long long continuousSubarrays(vector<int>& nums) {
         int N = nums.size();
         std::map<int, int> curr_elems;
-        
         int left = 0, right = 0;
-        
         long long result = 0;
-                
-        while (right < N) {
-            curr_elems[nums[right]]++;
+        int curr_min = nums[right], curr_max = nums[right];
+        
+        for (right = 0; right < N; right++) {
+            curr_min = min(curr_min, nums[right]);
+            curr_max = max(curr_max, nums[right]);
             
-            while (!isValid(curr_elems)) {
-                curr_elems[nums[left]]--;
-                if(curr_elems[nums[left]] == 0)
-                    curr_elems.erase(nums[left]);
-                left++;
+            if (curr_max - curr_min > 2) {
+                long long w_len = right - left;
+                result += ((w_len * (w_len + 1)) / 2);
+                
+                left = right;
+                curr_min = curr_max = nums[right];
+                
+                while (left > 0 && abs(nums[right] - nums[left-1]) <= 2) {
+                    left--;
+                    curr_min = min(curr_min, nums[left]);
+                    curr_max = max(curr_max, nums[left]);
+                }
+                
+                if (left < right) {
+                    long long w_len = right - left;
+                    result -= ((w_len * (w_len + 1)) / 2);
+                }
             }
-            result += (right - left + 1);
-            right++;
         }
+        
+        long long w_len = right - left;
+        result += ((w_len * (w_len + 1)) / 2);
         
         return result;
     }
@@ -85,4 +98,17 @@ optimized bf
             if (!found_valid_curr_sz) break;
         }
 
+// 
+        while (right < N) {
+            curr_elems[nums[right]]++;
+            
+            while (!isValid(curr_elems)) {
+                curr_elems[nums[left]]--;
+                if(curr_elems[nums[left]] == 0)
+                    curr_elems.erase(nums[left]);
+                left++;
+            }
+            result += (right - left + 1);
+            right++;
+        }
 **/
