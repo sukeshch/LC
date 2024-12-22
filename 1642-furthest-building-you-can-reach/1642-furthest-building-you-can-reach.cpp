@@ -28,23 +28,25 @@ public:
         long long curr_tot_sum = 0;
         
         int pos = 0;
-        for(; pos < (heights.size()-1); pos++) {
-            if (heights[pos+1] <= heights[pos])
-                continue;
-            
-            if (ladders < 0 && bricks <= 0) {
-                break;
-            }
-            
-            pq.push(heights[pos+1] - heights[pos]);
-            ladders--;
-            
-            if(ladders < 0) {
-                if (bricks < pq.top())
+        while(pos < (heights.size()-1)) {
+            if (heights[pos+1] > heights[pos])
+            {
+                if (ladders < 0 && bricks <= 0) {
                     break;
-                bricks -= pq.top();
-                pq.pop();
+                }
+
+                pq.push(heights[pos+1] - heights[pos]);
+                ladders--;
+
+                if(ladders < 0) {
+                    if (bricks < pq.top())
+                        break;
+                    bricks -= pq.top();
+                    pq.pop();
+                }
             }
+            
+            pos++;
         }
         
         return pos;
