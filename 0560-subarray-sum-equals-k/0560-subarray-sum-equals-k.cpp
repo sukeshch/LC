@@ -7,7 +7,7 @@ public:
         cmap[sum] = 1;
         for(int i=0; i < nums.size(); i++) {
             sum += nums[i];
-            if (cmap.find(sum - k) != cmap.end())
+            if (cmap.count(sum - k))
                 result += cmap[sum-k];
             cmap[sum]++;
         }
