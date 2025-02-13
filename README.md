@@ -15,6 +15,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0560-subarray-sum-equals-k](https://github.com/sukeshch/LC/tree/master/0560-subarray-sum-equals-k) |
+| [1572-subrectangle-queries](https://github.com/sukeshch/LC/tree/master/1572-subrectangle-queries) |
 ## Hash Table
 |  |
 | ------- |
@@ -23,4 +24,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0560-subarray-sum-equals-k](https://github.com/sukeshch/LC/tree/master/0560-subarray-sum-equals-k) |
+## Design
+|  |
+| ------- |
+| [1572-subrectangle-queries](https://github.com/sukeshch/LC/tree/master/1572-subrectangle-queries) |
+## Matrix
+|  |
+| ------- |
+| [1572-subrectangle-queries](https://github.com/sukeshch/LC/tree/master/1572-subrectangle-queries) |
 <!---LeetCode Topics End-->
