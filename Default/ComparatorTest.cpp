@@ -19,7 +19,7 @@ public:
     if (val != p.val) return val > p.val;
     return str > p.str;
   }
-  bool operator= (const ComparatorTest & p) const
+  bool operator==(const ComparatorTest & p) const
   {
     return p.val == val && p.str == str;
   }
@@ -37,6 +37,18 @@ void print (priority_queue < ComparatorTest, vector < ComparatorTest >,
     }
   cout << "end printing\n";
 }
+
+/*
+template <typename T, typename Comparator>
+void printPriorityQueueGeneric(std::priority_queue<T, std::vector<T>, Comparator> &q) {
+    auto pq = q;
+    while (!pq.empty()) {
+        std::cout << pq.top().val << " " << pq.top().str << "\n";
+        pq.pop();
+    }
+    std::cout << std::endl;
+}
+*/
 
 void print (priority_queue < ComparatorTest > q)
 {
