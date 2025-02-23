@@ -14,6 +14,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Array
 |  |
 | ------- |
+| [0529-minesweeper](https://github.com/sukeshch/LC/tree/master/0529-minesweeper) |
 | [0560-subarray-sum-equals-k](https://github.com/sukeshch/LC/tree/master/0560-subarray-sum-equals-k) |
 | [1572-subrectangle-queries](https://github.com/sukeshch/LC/tree/master/1572-subrectangle-queries) |
 ## Hash Table
@@ -31,5 +32,14 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Matrix
 |  |
 | ------- |
+| [0529-minesweeper](https://github.com/sukeshch/LC/tree/master/0529-minesweeper) |
 | [1572-subrectangle-queries](https://github.com/sukeshch/LC/tree/master/1572-subrectangle-queries) |
+## Depth-First Search
+|  |
+| ------- |
+| [0529-minesweeper](https://github.com/sukeshch/LC/tree/master/0529-minesweeper) |
+## Breadth-First Search
+|  |
+| ------- |
+| [0529-minesweeper](https://github.com/sukeshch/LC/tree/master/0529-minesweeper) |
 <!---LeetCode Topics End-->
